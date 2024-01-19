@@ -1,6 +1,8 @@
+import { TextareaHTMLAttributes } from "react";
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 
-interface TextAreaFieldProps {
+interface TextAreaFieldProps
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   id: string;
   placeholder: string;
   required?: boolean;
@@ -8,12 +10,13 @@ interface TextAreaFieldProps {
   error: FieldError | undefined;
 }
 
-export const TextAreaField = ({
+export const TextArea: React.FC<TextAreaFieldProps> = ({
   id,
   placeholder,
   required = false,
   register,
   error,
+  ...props
 }: TextAreaFieldProps) => {
   return (
     <>
@@ -26,6 +29,7 @@ export const TextAreaField = ({
         focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 
         focus:z-10 sm:text-sm"
         placeholder={placeholder}
+        {...props}
       />
       {error && <p>{error.message}</p>}
     </>

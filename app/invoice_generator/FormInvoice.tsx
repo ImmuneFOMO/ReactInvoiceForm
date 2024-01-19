@@ -2,8 +2,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { InvoiceFormData, invoiceSchema } from "@/lib/types";
-import { InputField } from "@/components/InputField";
-import { TextAreaField } from "@/components/TextAreaField";
+import { Input } from "@/components/InputField";
+import { TextArea } from "@/components/TextAreaField";
 import { saveInvoiceToLocalStorage } from "./saveInvoices";
 import { useRouter } from "next/navigation";
 import { createInvoice } from "../action";
@@ -40,7 +40,7 @@ export const FormInvoice = () => {
         className="max-w-md w-full px-4 sm:px-6 lg:px-8 space-y-2"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <InputField
+        <Input
           id="company-name"
           name="companyName"
           type="text"
@@ -49,7 +49,7 @@ export const FormInvoice = () => {
           register={register("companyName")}
           error={errors.companyName}
         />
-        <InputField
+        <Input
           id="vat-number"
           name="vatNumber"
           type="text"
@@ -58,7 +58,7 @@ export const FormInvoice = () => {
           register={register("vatNumber")}
           error={errors.vatNumber}
         />
-        <InputField
+        <Input
           id="purchase-value"
           name="purchaseValue"
           type="number"
@@ -67,7 +67,7 @@ export const FormInvoice = () => {
           register={register("purchaseValue", { valueAsNumber: true })}
           error={errors.purchaseValue}
         />
-        <TextAreaField
+        <TextArea
           id="description"
           placeholder="Description"
           required
