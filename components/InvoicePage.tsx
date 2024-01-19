@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { downloadAsPDF } from "./downloadPDF";
-import {invoiceFormDataId} from "@/lib/types";
+import { downloadAsPDF } from "../lib/downloadPDF";
+import { invoiceFormDataId } from "@/lib/types";
 
 export const InvoicePage = () => {
   const [invoices, setInvoices] = useState<invoiceFormDataId[]>([]);
@@ -49,12 +49,12 @@ export const InvoicePage = () => {
               {invoice.vatNumber}
             </p>
             <p className="mb-2 max-w-xl truncate">
-              <span className="font-semibold">Purchase Value:{" "}</span>
+              <span className="font-semibold">Purchase Value: </span>
               {invoice.purchaseValue}
             </p>
             <p className="mb-4 max-w-xl truncate">
               <span className="font-semibold">Description:</span>{" "}
-             {invoice.description}
+              {invoice.description}
             </p>
             <button
               onClick={() => downloadAsPDF(invoice, index)}

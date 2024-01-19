@@ -1,9 +1,9 @@
-import {FormInvoice} from "./FormInvoice"
+import { FormInvoice } from "./FormInvoice";
 
 export default function FormTest() {
   return (
     <div>
-        <FormInvoice></FormInvoice>
+      <FormInvoice></FormInvoice>
     </div>
-  )
+  );
 }

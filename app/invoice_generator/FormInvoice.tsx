@@ -1,12 +1,12 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { InvoiceFormData, invoiceSchema } from "@/lib/types";
 import { InputField } from "@/components/InputField";
 import { TextAreaField } from "@/components/TextAreaField";
 import { saveInvoiceToLocalStorage } from "./saveInvoices";
 import { useRouter } from "next/navigation";
-import { v4 as uuidv4 } from 'uuid';
+import { createInvoice } from "../action";
 
 export const FormInvoice = () => {
   const {
@@ -18,23 +18,20 @@ export const FormInvoice = () => {
   });
   const router = useRouter();
 
+  const onSubmit: SubmitHandler<InvoiceFormData> = async (data) => {
+    const result = await createInvoice(data);
 
-  const onSubmit = async (data: InvoiceFormData) => {
-    const response = await fetch("/api/invoice", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    const result = await response.json();
-    if (response.ok) {
-      saveInvoiceToLocalStorage(result);
-      router.push("/");
-    } else {
-      console.error("Generation failed: ", result);
+    if (!result) {
+      console.log("Submitting error!");
+      return;
     }
+
+    if (result.error) {
+      return;
+    }
+
+    saveInvoiceToLocalStorage(result);
+    router.push("/");
   };
 
   return (

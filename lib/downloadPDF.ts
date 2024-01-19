@@ -52,8 +52,22 @@ export const downloadAsPDF = async (invoiceData: any, index: number) => {
   pdf.save(`invoice-${index + 1}.pdf`);
 };
 
-function addWrappedText({ text, pdf, x, y, maxWidth, lineHeight }: { text: string, pdf: any, x: number, y: number, maxWidth: number, lineHeight: number }) {
-    const lines = pdf.splitTextToSize(text, maxWidth);
-    pdf.text(x, y + lineHeight / 2, lines);
-    return y + lineHeight / 2 + lines.length * lineHeight;
+function addWrappedText({
+  text,
+  pdf,
+  x,
+  y,
+  maxWidth,
+  lineHeight,
+}: {
+  text: string;
+  pdf: any;
+  x: number;
+  y: number;
+  maxWidth: number;
+  lineHeight: number;
+}) {
+  const lines = pdf.splitTextToSize(text, maxWidth);
+  pdf.text(x, y + lineHeight / 2, lines);
+  return y + lineHeight / 2 + lines.length * lineHeight;
 }
