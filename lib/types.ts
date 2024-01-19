@@ -1,14 +1,18 @@
 import { z } from "zod";
 
-export const signUpSchema = z
-  .object({
-    email: z.string().email(),
-    password: z.string().min(10, "Password need to be at least 10 characters"),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords need to match",
-    path: ["confirmPassword"],
-  });
+export const invoiceSchema = z.object({
+  companyName: z.string().min(1, "Company Name is required"),
+  vatNumber: z.string().min(1, "VAT Number is required"),
+  purchaseValue: z.number().min(0.01, "Purchase Value must be greater than 0"),
+  description: z.string().min(1, "Description is required"),
+});
 
-export type TSignUpSchema = z.infer<typeof signUpSchema>;
+export interface invoiceFormDataId {
+  id: string;
+  companyName: string;
+  vatNumber: string;
+  purchaseValue: string;
+  description: string;
+}
+
+export type InvoiceFormData = z.infer<typeof invoiceSchema>;

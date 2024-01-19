@@ -1,10 +1,10 @@
-import { signUpSchema } from "@/lib/types";
+import { invoiceSchema } from "@/lib/types";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const body: unknown = await request.json();
 
-  const result = signUpSchema.safeParse(body);
+  const result = invoiceSchema.safeParse(body);
   let zodErrors = {};
   if (!result.success) {
     result.error.issues.forEach((issue) => {
@@ -15,6 +15,6 @@ export async function POST(request: Request) {
   return NextResponse.json(
     Object.keys(zodErrors).length > 0
       ? { errors: zodErrors }
-      : { success: true }
+      : {...result}
   );
-}
+  }

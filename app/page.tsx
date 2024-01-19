@@ -1,4 +1,5 @@
+import { InvoicePage } from "@/components/InvoicePage";
 
 export default function Page() {
-    return <h1>Hello,WORLD!!</h1>
-  }
+  return <InvoicePage></InvoicePage>;
+}
